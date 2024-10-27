@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Listing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <input type="text" id="search-bar" placeholder="Search for products...">
+        <label for="sort-options" class="visually-hidden">Sort By</label>
+        <select id="sort-options" title="Sort By">
+            <option value="default">Sort By</option>
+            <option value="low-to-high">Price: Low to High</option>
+            <option value="high-to-low">Price: High to Low</option>
+        </select>
+        <div class="cart-counter">Cart: <span id="cart-count">0</span></div>
+    </header>
+    <main>
+        <div id="loading">Loading...</div>
+        <div id="error">Error loading products.</div>
+        <div id="product-list" class="product-list"></div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
