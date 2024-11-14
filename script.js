@@ -31,10 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="product-item">
                         <img src="${product.image}" alt="${product.title}">
                         <h2>${product.title}</h2>
-                        <p>$${product.price.toFixed(2)}</p>
+                        <div class="price-info">
+                          <p>$${product.price.toFixed(2)}</p>
                         <button onclick="addToCart(${
                           product.id
                         })">Add to Cart</button>
+                        </div>
+                        
                     </div>
                 `
       )

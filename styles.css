@@ -1,4 +1,8 @@
-
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -21,6 +25,23 @@ header select {
 
 header .cart-counter {
     font-weight: bold;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cart-counter i {
+    font-size: 1.2em; /* Adjust icon size as needed */
+    color: #333;
+}
+
+#cart-count {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    padding: 5px 8px; /* Padding to make it circular */
+    border-radius: 50%; /* Round shape */
+    font-size: 0.9em; /* Slightly smaller text */
 }
 
 .product-list {
@@ -37,21 +58,45 @@ header .cart-counter {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 380px; /* Set a fixed height for consistency */
 }
 
 .product-item img {
-    max-width: 100%;
-    height: auto;
+    max-width: 100%; 
+    height: 150px; 
+    object-fit: contain; /* Ensures image stays within bounds */
+    margin-bottom: 10px;
 }
 
 .product-item h2 {
     font-size: 1.2em;
     margin: 10px 0;
+    flex-grow: 1; /* Allows title to take up space and push content down */
+}
+
+.price-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    width: 100%; 
+    padding-top: 10px;
+    border-top: 1px solid #ddd; 
+}
+.price-info p {
+    font-size: 1.2em; /* Increased font size for the price */
+    font-weight: bold;
+    color: #333;
+    margin: 0;
 }
 
 .product-item p {
     font-size: 1em;
     color: #333;
+    margin: 0; /* Removes default margin for consistent spacing */
 }
 
 .product-item button {
@@ -61,12 +106,13 @@ header .cart-counter {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-left: 10px; 
 }
+
 
 .product-item button:hover {
     background-color: #218838;
 }
-
 
 @media (max-width: 600px) {
     .product-item {
@@ -74,13 +120,11 @@ header .cart-counter {
     }
 }
 
-
 @media (max-width: 480px) {
     .product-item {
         flex: 1 1 100%; 
     }
 }
-
 
 .visually-hidden {
     position: absolute;
@@ -92,7 +136,6 @@ header .cart-counter {
     clip: rect(0, 0, 0, 0);
     border: 0;
 }
-
 
 #error {
     display: none;
