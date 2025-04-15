@@ -3,28 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Listing</title>
+    <title>E-commerce Store</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <input type="text" id="search-bar" placeholder="Search for products...">
-        <label for="sort-options" class="visually-hidden">Sort By</label>
-        <select id="sort-options" title="Sort By">
-            <option value="default">Sort By</option>
-            <option value="low-to-high">Price: Low to High</option>
-            <option value="high-to-low">Price: High to Low</option>
-        </select>
-        <div class="cart-counter">
-    <i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span>
-</div>
+    <header class="header">
+        <div class="header-container">
+            <h1 class="logo">ShopEasy</h1>
+            <div class="search-container">
+                <input type="text" id="search-bar" placeholder="Search products...">
+                <button type="button" title="Search" id="search-button"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-actions">
+                <button type="button" title="Toggle Theme" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button type="button" title="Wishlist" id="wishlist-toggle">
+                    <i class="fas fa-heart"></i>
+                    <span  id="wishlist-count" >0</span>
+                </button>
+                <button type="button" title="Cart" id="cart-toggle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" >0</span>
+                </button>
+            </div>
+        </div>
     </header>
-    <main>
-        <div id="loading">Loading...</div>
-        <div id="error">Error loading products.</div>
-        <div id="product-list" class="product-list"></div>
-    </main>
+
+    <div class="sub-header">
+        <button type="button" title="Open Filters" id="filter-toggle">
+            <i class="fas fa-filter"></i> Filters
+        </button>
+        <div class="sort-container">
+            <label for="sort-options">Sort by:</label>
+            <select id="sort-options">
+                <option value="">Default</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="rating-desc">Rating: High to Low</option>
+                <option value="name-asc">Name: A to Z</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <aside class="filter-sidebar" id="filter-sidebar">
+            <div class="sidebar-header">
+                <h3>Filters</h3>
+                <button type="button" title="Close Filters" id="close-filters"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="filter-section">
+                <h4>Price Range</h4>
+                <div class="price-range">
+                    <input title="Price Range" type="range" id="price-slider" min="0" max="1000" value="1000">
+                    <div class="price-values">
+                        <span>$0</span>
+                        <span id="max-price">$1000</span>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h4>Category</h4>
+                <div class="category-list" id="category-list">
+                    </div>
+            </div>
+            <button type="button" id="apply-filters">Apply Filters</button>
+            <button type="button" id="reset-filters">Reset Filters</button>
+        </aside>
+
+        <main class="main-content">
+            <div class="loading-skeleton" id="loading" >
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+                <div class="skeleton-item"></div>
+            </div>
+            <div class="error-message" id="error" >
+                <p>Failed to load products. Please try again.</p>
+                <button type="button" id="retry-button">Retry</button>
+            </div>
+            <div class="product-grid" id="product-list">
+                </div>
+            <div class="pagination" id="page-numbers" >
+                <button type="button" id="prev-page" disabled>Previous</button>
+                <div id="page-numbers-container">
+                    </div>
+                <button type="button" id="next-page" disabled>Next</button>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="quick-view-modal">
+        <div class="modal-content">
+            <button type="button" title="Close Quick View" class="close-modal">&times;</button>
+            <div id="quick-view-content">
+                </div>
+        </div>
+    </div>
+
+    <aside class="sidebar" id="cart-sidebar">
+        <div class="modal-content">
+            <div class="sidebar-header">
+                <h3>Shopping Cart</h3>
+                <button type="button" title="Close Cart" class="close-sidebar">&times;</button>
+            </div>
+            <div class="sidebar-body" id="cart-items">
+                <div class="empty-cart"  id="empty-cart" >
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <div class="coupon-section">
+                    <input type="text" id="coupon-code" placeholder="Enter coupon code">
+                    <button type="button" id="apply-coupon">Apply</button>
+                </div>
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cart-total-price">$0.00</span>
+                </div>
+                <button type="button" id="checkout-button">Proceed to Checkout</button>
+            </div>
+        </div>
+    </aside>
+
+    <aside class="sidebar" id="wishlist-sidebar">
+        <div class="modal-content">
+            <div class="sidebar-header">
+                <h3>Wishlist</h3>
+                <button type="button" class="close-sidebar">&times;</button>
+            </div>
+            <div class="sidebar-body" id="wishlist-items">
+                <div class="empty-wishlist" id="empty-wishlist">
+                    <i class="fas fa-heart"></i>
+                    <p>Your wishlist is empty</p>
+                </div>
+            </div>
+            </div>
+    </aside>
+
+    <div class="toast" id="toast">
+        <span id="toast-message"></span>
+        <button type="button" id="toast-undo" >Undo</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
